@@ -70,7 +70,7 @@ int main(int argc, char** argv)
 ```
 
 
-The following code will get the output:
+The above code will get the output:
 
 ```json
 {
@@ -96,3 +96,8 @@ The following code will get the output:
     "age": 44
 }
 ```
+
+
+----
+
+Deserialize from a json to native struct is not yet implemented.
