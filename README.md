@@ -11,7 +11,7 @@ For those structs/classes you want to serailize to json, all you need to do is d
 template <class Archiver>
 bool SerializeToJson(Archiver& ar) const;
 ```
-public member function as shown below, then you can serialize this struct to json with only ONE line of code: 
+public member function as shown above, then you can serialize this struct to json with only ONE line of code: 
 ```C++
 jsonmapper::SerializeToJsonString(your_struct, the_output_string, true_if_you_want_pretty_print);
 ```
