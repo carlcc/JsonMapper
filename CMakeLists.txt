@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(jsonmapper)
 
+set(CMAKE_CXX_STANDARD 11)
+
 add_library(jsonmapper INTERFACE)
 target_include_directories(jsonmapper INTERFACE 
     include
