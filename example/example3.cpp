@@ -39,7 +39,8 @@ struct Address {
             JMKVP(street),
             JMKVP(number),
             JMKVP(test_field),
-            JMKVP(nullable_string), JMKVP(another_nullable_string));
+            JMKVP(nullable_string),
+            JMKVP(another_nullable_string));
     }
     template <class Archiver>
     bool DeserializeFromJson(Archiver& ar)
