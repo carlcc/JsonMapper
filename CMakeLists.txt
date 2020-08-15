@@ -5,7 +5,7 @@ project(jsonmapper)
 add_library(jsonmapper INTERFACE)
 target_include_directories(jsonmapper INTERFACE 
     include
-    . # Add this so that we can find rapidjson
+    thirdparty # Add this so that we can find rapidjson
     )
 
 
