@@ -16,18 +16,26 @@ bool DeserializeFromJson(T& t, const rapidjson::Value& value, const DeserializeC
 
 }
 
-#include "types/basic_types.h"
+#include "types/deserialize/basic_types.h"
 
 namespace jsonmapper {
 
 class Deserializer {
 public:
-    rapidjson::Value& value_;
+    const rapidjson::Value& value_;
     const DeserializeContext& context_;
 
     template <class T>
     bool operator()(const KVPair<T>& kvp)
     {
+        auto it = value_.FindMember(kvp.key);
+        if (it == value_.MemberEnd()) {
+            return false;
+        }
+        if (!DeserializeFromJson(kvp.value, it->value, context_)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -40,15 +48,36 @@ public:
 
 template <class T>
 struct DeserializerImpl {
-    bool operator()(const T& t, rapidjson::Value& value, const DeserializeContext& context)
+    bool operator()(T& t, const rapidjson::Value& value, const DeserializeContext& context)
     {
+        if (!value.IsObject()) {
+            return false;
+        }
+        Deserializer d { value, context };
+        return t.DeserializeFromJson(d);
     }
 };
 
 template <class T>
-bool DeserializeFromJson(const T& t, rapidjson::Value& value, const DeserializeContext& context)
+bool DeserializeFromJson(T& t, const rapidjson::Value& value, const DeserializeContext& context)
 {
     return DeserializerImpl<T>()(t, value, context);
+}
+
+
+template <class T>
+bool DeserializeFromJsonString(T& t, const std::string& string)
+{
+    rapidjson::Document root;
+    root.Parse(string.c_str(), (rapidjson::SizeType)string.length());
+    if (root.HasParseError()) {
+        return false;
+    }
+    if (!DeserializeFromJson<T>(t, root, { })) {
+        return false;
+    }
+
+    return true;
 }
 
 }

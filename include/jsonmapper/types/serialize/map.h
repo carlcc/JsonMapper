@@ -11,7 +11,7 @@ struct SerializerImpl<std::map<std::string, T>> {
     {
         value.SetObject();
         for (auto& entry : vec) {
-            rapidjson::Value key(entry.first.c_str(), entry.first.length(), context.allocator);
+            rapidjson::Value key(entry.first.c_str(), (rapidjson::SizeType)entry.first.length(), context.allocator);
             rapidjson::Value ele;
             if (!SerializeToJson(entry.second, ele, context)) {
                 return false;

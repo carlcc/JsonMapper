@@ -6,16 +6,20 @@
 namespace jsonmapper {
 
 template <class T>
-struct SerializerImpl<std::unordered_set<T>> {
-    bool operator()(const std::unordered_set<T>& set, rapidjson::Value& value, const SerializeContext& context)
+struct DeserializerImpl<std::unordered_set<T>> {
+    bool operator()(std::unordered_set<T>& set, const rapidjson::Value& value, const DeserializeContext& context)
     {
-        value.SetArray();
-        for (auto& e : set) {
-            rapidjson::Value ele;
-            if (!SerializeToJson(e, ele, context)) {
+        if (!value.IsArray()) {
+            return false;
+        }
+
+        size_t i = 0;
+        for (auto it = value.Begin(), endIt = value.End(); it != endIt; ++it) {
+            T obj;
+            if (!DeserializeFromJson(obj, *it, context)) {
                 return false;
             }
-            value.PushBack(std::move(ele), context.allocator);
+            set.insert(std::move(obj));
         }
         return true;
     }

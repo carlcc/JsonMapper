@@ -6,9 +6,12 @@
 namespace jsonmapper {
 
 template <>
-bool SerializeToJson<std::string>(const std::string& v, rapidjson::Value& value, const SerializeContext& context)
+bool DeserializeFromJson<std::string>(std::string& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
-    value.SetString(v.c_str(), v.length(), context.allocator);
+    if (!value.IsString()) {
+        return false;
+    }
+    v = std::string(value.GetString(), (size_t)value.GetStringLength());
     return true;
 }
 

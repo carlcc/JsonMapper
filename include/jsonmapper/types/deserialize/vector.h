@@ -6,16 +6,19 @@
 namespace jsonmapper {
 
 template <class T>
-struct SerializerImpl<std::vector<T>> {
-    bool operator()(const std::vector<T>& vec, rapidjson::Value& value, const SerializeContext& context)
+struct DeserializerImpl<std::vector<T>> {
+    bool operator()(std::vector<T>& vec, const rapidjson::Value& value, const DeserializeContext& context)
     {
-        value.SetArray();
-        for (auto& e : vec) {
-            rapidjson::Value ele;
-            if (!SerializeToJson(e, ele, context)) {
+        if (!value.IsArray()) {
+            return false;
+        }
+
+        vec.resize((size_t)value.Size());
+        size_t i = 0;
+        for (auto it = value.Begin(), endIt = value.End(); it != endIt; ++it) {
+            if (!DeserializeFromJson(vec[i++], *it, context)) {
                 return false;
             }
-            value.PushBack(std::move(ele), context.allocator);
         }
         return true;
     }

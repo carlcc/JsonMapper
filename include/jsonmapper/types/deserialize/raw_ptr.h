@@ -5,15 +5,10 @@
 namespace jsonmapper {
 
 template <class T>
-struct SerializerImpl<T*> {
-    bool operator()(const T* t, rapidjson::Value& value, const SerializeContext& context)
+struct DeserializerImpl<T*> {
+    bool operator()(T* t, const rapidjson::Value& value, const DeserializeContext& context)
     {
-        if (t == nullptr) {
-            value.SetNull();
-            return true;
-        } else {
-            return SerializeToJson(*t, value, context);
-        }
+        static_assert(false, "Deserialize a raw pointer is not supported yet");
     }
 };
 

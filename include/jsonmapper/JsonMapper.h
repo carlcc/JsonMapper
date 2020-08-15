@@ -18,4 +18,5 @@ KVPair<T> MakeKVPair(const char* key, T& value)
 
 } // namespace jsonmapper
 
+#include "DeserializeFromJson.h"
 #include "SerializeToJson.h"

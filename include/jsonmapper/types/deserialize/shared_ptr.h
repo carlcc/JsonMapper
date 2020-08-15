@@ -6,14 +6,15 @@
 namespace jsonmapper {
 
 template <class T>
-struct SerializerImpl<std::shared_ptr<T>> {
-    bool operator()(const std::shared_ptr<T>& t, rapidjson::Value& value, const SerializeContext& context)
+struct DeserializerImpl<std::shared_ptr<T>> {
+    bool operator()(std::shared_ptr<T>& t, const rapidjson::Value& value, const DeserializeContext& context)
     {
-        if (t == nullptr) {
-            value.SetNull();
+        if (value.IsNull()) {
+            t = nullptr;
             return true;
         } else {
-            return SerializeToJson(*t, value, context);
+            t = std::make_shared<T>();
+            return DeserializeFromJson(*t, value, context);
         }
     }
 };
