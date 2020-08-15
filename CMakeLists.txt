@@ -11,5 +11,9 @@ target_include_directories(jsonmapper INTERFACE
 
 # example
 file(GLOB_RECURSE JSON_MAPPER_FILES include/*)
-add_executable(example1 example/example1.cpp ${JSON_MAPPER_FILES})
-target_link_libraries(example1 PRIVATE jsonmapper)
+set(EXAMPLES example1 example2 example3)
+
+foreach(example ${EXAMPLES})
+    add_executable(${example} example/${example}.cpp ${JSON_MAPPER_FILES})
+    target_link_libraries(${example} PRIVATE jsonmapper)
+endforeach()
