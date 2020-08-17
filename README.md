@@ -71,19 +71,6 @@ int main(int argc, char** argv)
 
 ```
 
-# Deserialize from json
-
-For those structs/classes you want to deserailize from json, all you need to do is define a 
-
-```C++
-template <class Archiver>
-bool DeserializeFromJson(Archiver& ar);
-```
-public member function as shown above, then you can deserialize this struct from json with only ONE line of code: 
-```C++
-jsonmapper::DeserializeFromJsonString(your_struct, the_input_string);
-```
-
 The above code will get the output:
 
 ```json
@@ -109,6 +96,19 @@ The above code will get the output:
     "name": "Bill",
     "age": 44
 }
+```
+
+# Deserialize from json
+
+For those structs/classes you want to deserailize from json, all you need to do is define a 
+
+```C++
+template <class Archiver>
+bool DeserializeFromJson(Archiver& ar);
+```
+public member function as shown above, then you can deserialize this struct from json with only ONE line of code: 
+```C++
+jsonmapper::DeserializeFromJsonString(your_struct, the_input_string);
 ```
 
 
