@@ -5,6 +5,7 @@
 #include <jsonmapper/types/serialize/string.h>
 #include <jsonmapper/types/serialize/unordered_map.h>
 #include <jsonmapper/types/serialize/vector.h>
+#include <memory>
 #include <sstream>
 #include <string>
 #include <unordered_map>

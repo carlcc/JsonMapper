@@ -13,7 +13,6 @@ struct DeserializerImpl<std::set<T>> {
             return false;
         }
 
-        size_t i = 0;
         for (auto it = value.Begin(), endIt = value.End(); it != endIt; ++it) {
             T obj;
             if (!DeserializeFromJson(obj, *it, context)) {
