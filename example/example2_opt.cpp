@@ -30,30 +30,18 @@ struct Student {
     template <class Archiver>
     bool DeserializeFromJson(Archiver& ar)
     {
-        return ar(JMKVP(address), JMKVP(name), JMKVP(age));
+        // NOTE:
+        // The difference between this example and example2 is that the 'address` field is optional,
+        // thus, the deserializer just ignores 'address' field when it cannot find 'address' field.
+        // NOTE2:
+        // The 'address' field is just optional, if there is 'address' field, but it's wrong data,
+        // this function will return false then.
+        return ar(JMOPTKVP(address), JMKVP(name), JMKVP(age));
     }
 };
 
 const std::string kJsonString =
     R"({
-    "address": {
-        "Home": {
-            "street": [
-                "ShangHai",
-                "China",
-                "Asia"
-            ],
-            "nullable_string": "A nullable string"
-        },
-        "School": {
-            "street": [
-                "Beijing",
-                "China",
-                "Asia"
-            ],
-            "nullable_string": null
-        }
-    },
     "name": "Bill",
     "age": 44
 })";

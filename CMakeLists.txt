@@ -4,10 +4,14 @@ project(jsonmapper)
 
 set(CMAKE_CXX_STANDARD 14)
 
+if ("${JSON_MAPPER_RAPIDJSON_INCLUDE_PATH}" STREQUAL "")
+    set(JSON_MAPPER_RAPIDJSON_INCLUDE_PATH thirdparty/rapidjson/include) # Add this so that we can find rapidjson
+endif()
+
 add_library(jsonmapper INTERFACE)
 target_include_directories(jsonmapper INTERFACE 
     include
-    thirdparty # Add this so that we can find rapidjson
+    ${JSON_MAPPER_RAPIDJSON_INCLUDE_PATH}
     )
 
 

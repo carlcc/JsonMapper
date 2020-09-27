@@ -38,6 +38,19 @@ public:
 
         return true;
     }
+    template <class T>
+    bool operator()(const OptKVPair<T>& kvp)
+    {
+        auto it = value_.FindMember(kvp.key);
+        if (it == value_.MemberEnd()) {
+            return true;
+        }
+        if (!DeserializeFromJson(kvp.value, it->value, context_)) {
+            return false;
+        }
+
+        return true;
+    }
 
     template <class ARG1, class... ARGS>
     bool operator()(const ARG1& arg1, const ARGS&... args)
