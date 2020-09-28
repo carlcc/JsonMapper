@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(jsonmapper)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 if ("${JSON_MAPPER_RAPIDJSON_INCLUDE_PATH}" STREQUAL "")
     set(JSON_MAPPER_RAPIDJSON_INCLUDE_PATH thirdparty/rapidjson/include) # Add this so that we can find rapidjson

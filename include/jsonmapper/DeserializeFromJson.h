@@ -5,6 +5,7 @@
 #include "rapidjson/prettywriter.h"
 #include "rapidjson/stream.h"
 #include "rapidjson/writer.h"
+#include <string_view>
 
 namespace jsonmapper {
 
@@ -77,16 +78,15 @@ bool DeserializeFromJson(T& t, const rapidjson::Value& value, const DeserializeC
     return DeserializerImpl<T>()(t, value, context);
 }
 
-
 template <class T>
-bool DeserializeFromJsonString(T& t, const std::string& string)
+bool DeserializeFromJsonString(T& t, std::string_view string)
 {
     rapidjson::Document root;
     root.Parse(string.c_str(), (rapidjson::SizeType)string.length());
     if (root.HasParseError()) {
         return false;
     }
-    if (!DeserializeFromJson<T>(t, root, { })) {
+    if (!DeserializeFromJson<T>(t, root, {})) {
         return false;
     }
 
