@@ -82,7 +82,7 @@ template <class T>
 bool DeserializeFromJsonString(T& t, std::string_view string)
 {
     rapidjson::Document root;
-    root.Parse(string.c_str(), (rapidjson::SizeType)string.length());
+    root.Parse(string.data(), (rapidjson::SizeType)string.length());
     if (root.HasParseError()) {
         return false;
     }
