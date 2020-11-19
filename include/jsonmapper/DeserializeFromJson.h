@@ -73,13 +73,13 @@ struct DeserializerImpl {
 };
 
 template <class T>
-bool DeserializeFromJson(T& t, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson(T& t, const rapidjson::Value& value, const DeserializeContext& context)
 {
     return DeserializerImpl<T>()(t, value, context);
 }
 
 template <class T>
-bool DeserializeFromJsonString(T& t, std::string_view string)
+inline bool DeserializeFromJsonString(T& t, std::string_view string)
 {
     rapidjson::Document root;
     root.Parse(string.data(), (rapidjson::SizeType)string.length());

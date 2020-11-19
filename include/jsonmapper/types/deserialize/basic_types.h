@@ -6,7 +6,7 @@
 namespace jsonmapper {
 
 template <>
-bool DeserializeFromJson<bool>(bool& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<bool>(bool& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsBool()) {
@@ -17,7 +17,7 @@ bool DeserializeFromJson<bool>(bool& v, const rapidjson::Value& value, const Des
 }
 
 template <>
-bool DeserializeFromJson<int8_t>(int8_t& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<int8_t>(int8_t& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsInt64()) {
@@ -28,7 +28,7 @@ bool DeserializeFromJson<int8_t>(int8_t& v, const rapidjson::Value& value, const
 }
 
 template <>
-bool DeserializeFromJson<int16_t>(int16_t& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<int16_t>(int16_t& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsInt64()) {
@@ -39,7 +39,7 @@ bool DeserializeFromJson<int16_t>(int16_t& v, const rapidjson::Value& value, con
 }
 
 template <>
-bool DeserializeFromJson<int32_t>(int32_t& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<int32_t>(int32_t& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsInt64()) {
@@ -50,7 +50,7 @@ bool DeserializeFromJson<int32_t>(int32_t& v, const rapidjson::Value& value, con
 }
 
 template <>
-bool DeserializeFromJson<int64_t>(int64_t& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<int64_t>(int64_t& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsInt64()) {
@@ -61,7 +61,7 @@ bool DeserializeFromJson<int64_t>(int64_t& v, const rapidjson::Value& value, con
 }
 
 template <>
-bool DeserializeFromJson<uint8_t>(uint8_t& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<uint8_t>(uint8_t& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsUint64()) {
@@ -72,7 +72,7 @@ bool DeserializeFromJson<uint8_t>(uint8_t& v, const rapidjson::Value& value, con
 }
 
 template <>
-bool DeserializeFromJson<uint16_t>(uint16_t& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<uint16_t>(uint16_t& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsUint64()) {
@@ -83,7 +83,7 @@ bool DeserializeFromJson<uint16_t>(uint16_t& v, const rapidjson::Value& value, c
 }
 
 template <>
-bool DeserializeFromJson<uint32_t>(uint32_t& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<uint32_t>(uint32_t& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsUint64()) {
@@ -94,7 +94,7 @@ bool DeserializeFromJson<uint32_t>(uint32_t& v, const rapidjson::Value& value, c
 }
 
 template <>
-bool DeserializeFromJson<uint64_t>(uint64_t& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<uint64_t>(uint64_t& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsUint64()) {
@@ -105,7 +105,7 @@ bool DeserializeFromJson<uint64_t>(uint64_t& v, const rapidjson::Value& value, c
 }
 
 template <>
-bool DeserializeFromJson<float>(float& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<float>(float& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsFloat()) {
@@ -116,7 +116,7 @@ bool DeserializeFromJson<float>(float& v, const rapidjson::Value& value, const D
 }
 
 template <>
-bool DeserializeFromJson<double>(double& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<double>(double& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     (void)context;
     if (!value.IsDouble()) {

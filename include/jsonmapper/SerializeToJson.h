@@ -58,13 +58,13 @@ struct SerializerImpl {
 };
 
 template <class T>
-bool SerializeToJson(const T& t, rapidjson::Value& value, const SerializeContext& context)
+inline bool SerializeToJson(const T& t, rapidjson::Value& value, const SerializeContext& context)
 {
     return SerializerImpl<T>()(t, value, context);
 }
 
 template <class T>
-bool SerializeToJsonString(const T& t, std::string& string, bool pretty = false)
+inline bool SerializeToJsonString(const T& t, std::string& string, bool pretty = false)
 {
     rapidjson::Document root;
     if (!SerializeToJson<T>(t, root, { root.GetAllocator() })) {
