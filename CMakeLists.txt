@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(jsonmapper)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
 option(BUILD_EXAMPLE "Build examples" OFF)
 
