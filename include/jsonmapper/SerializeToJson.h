@@ -40,6 +40,20 @@ public:
         return true;
     }
 
+    template <class T>
+    bool operator()(const OptKVPair<T>& kvp)
+    {
+        rapidjson::Value key(kvp.key, context_.allocator);
+        rapidjson::Value value;
+        if (!SerializeToJson(kvp.value, value, context_)) {
+            return false;
+        }
+        value_.AddMember(key, std::move(value), context_.allocator);
+
+        return true;
+    }
+
+
     template <class ARG1, class... ARGS>
     bool operator()(const ARG1& arg1, const ARGS&... args)
     {

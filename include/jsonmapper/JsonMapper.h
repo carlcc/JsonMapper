@@ -9,7 +9,7 @@ struct KVPair {
 };
 
 template <class T>
-KVPair<T> MakeKVPair(const char* key, T& value)
+inline KVPair<T> MakeKVPair(const char* key, T& value)
 {
     return KVPair<T> { key, value };
 }
@@ -21,10 +21,23 @@ struct OptKVPair {
 };
 
 template <class T>
-OptKVPair<T> MakeOptKVPair(const char* key, T& value)
+inline OptKVPair<T> MakeOptKVPair(const char* key, T& value)
 {
     return OptKVPair<T> { key, value };
 }
+
+#define JM_DEFINE_MAP(...)                   \
+public:                                      \
+    template <class Archiver>                \
+    bool SerializeToJson(Archiver& ar) const \
+    {                                        \
+        return ar(__VA_ARGS__);              \
+    }                                        \
+    template <class Archiver>                \
+    bool DeserializeFromJson(Archiver& ar)   \
+    {                                        \
+        return ar(__VA_ARGS__);              \
+    }
 
 #define JMKVP(field) ::jsonmapper::MakeKVPair(#field, field)
 

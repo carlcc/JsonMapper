@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.0)
 
 project(jsonmapper)
 
-set(CMAKE_CXX_STANDARD 14)
-
 option(BUILD_EXAMPLE "Build examples" OFF)
 
 if ("${JSON_MAPPER_RAPIDJSON_INCLUDE_PATH}" STREQUAL "")
@@ -14,7 +12,12 @@ add_library(jsonmapper INTERFACE)
 target_include_directories(jsonmapper INTERFACE 
     include
     ${JSON_MAPPER_RAPIDJSON_INCLUDE_PATH}
-    )
+)
+
+set_target_properties(jsonmapper
+PROPERTIES
+    CXX_STANDARD 14
+)
 
 
 # example
