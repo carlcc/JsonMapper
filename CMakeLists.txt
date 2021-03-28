@@ -14,12 +14,6 @@ target_include_directories(jsonmapper INTERFACE
     ${JSON_MAPPER_RAPIDJSON_INCLUDE_PATH}
 )
 
-set_target_properties(jsonmapper
-PROPERTIES
-    CXX_STANDARD 14
-)
-
-
 # example
 if (BUILD_EXAMPLE)
     file(GLOB_RECURSE JSON_MAPPER_FILES include/*)
