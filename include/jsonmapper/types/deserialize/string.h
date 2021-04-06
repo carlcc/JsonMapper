@@ -6,7 +6,7 @@
 namespace jsonmapper {
 
 template <>
-bool DeserializeFromJson<std::string>(std::string& v, const rapidjson::Value& value, const DeserializeContext& context)
+inline bool DeserializeFromJson<std::string>(std::string& v, const rapidjson::Value& value, const DeserializeContext& context)
 {
     if (!value.IsString()) {
         return false;
