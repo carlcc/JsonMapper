@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(jsonmapper)
 
-option(BUILD_EXAMPLE "Build examples" OFF)
+option(JSONMAPPER_BUILD_EXAMPLE "Build examples" OFF)
 
 if ("${JSON_MAPPER_RAPIDJSON_INCLUDE_PATH}" STREQUAL "")
     set(JSON_MAPPER_RAPIDJSON_INCLUDE_PATH thirdparty/rapidjson/include) # Add this so that we can find rapidjson
@@ -15,7 +15,7 @@ target_include_directories(jsonmapper INTERFACE
 )
 
 # example
-if (BUILD_EXAMPLE)
+if (JSONMAPPER_BUILD_EXAMPLE)
     file(GLOB_RECURSE JSON_MAPPER_FILES include/*)
     set(EXAMPLES example1 example2 example3)
 
@@ -23,4 +23,4 @@ if (BUILD_EXAMPLE)
         add_executable(${example} example/${example}.cpp ${JSON_MAPPER_FILES})
         target_link_libraries(${example} PRIVATE jsonmapper)
     endforeach()
-endif(BUILD_EXAMPLE)
+endif(JSONMAPPER_BUILD_EXAMPLE)
