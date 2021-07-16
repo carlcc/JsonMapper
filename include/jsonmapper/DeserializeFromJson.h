@@ -1,11 +1,11 @@
 #pragma once
 
+#include "StringView.h"
 #include "rapidjson/document.h"
 #include "rapidjson/ostreamwrapper.h"
 #include "rapidjson/prettywriter.h"
 #include "rapidjson/stream.h"
 #include "rapidjson/writer.h"
-#include <string_view>
 
 namespace jsonmapper {
 
@@ -79,7 +79,7 @@ inline bool DeserializeFromJson(T& t, const rapidjson::Value& value, const Deser
 }
 
 template <class T>
-inline bool DeserializeFromJsonString(T& t, std::string_view string)
+inline bool DeserializeFromJsonString(T& t, StringView string)
 {
     rapidjson::Document root;
     root.Parse(string.data(), (rapidjson::SizeType)string.length());

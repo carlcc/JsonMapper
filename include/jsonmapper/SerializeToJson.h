@@ -1,5 +1,6 @@
 #pragma once
 
+#include "StringView.h"
 #include "rapidjson/document.h"
 #include "rapidjson/ostreamwrapper.h"
 #include "rapidjson/prettywriter.h"
@@ -52,7 +53,6 @@ public:
 
         return true;
     }
-
 
     template <class ARG1, class... ARGS>
     bool operator()(const ARG1& arg1, const ARGS&... args)

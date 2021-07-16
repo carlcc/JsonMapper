@@ -9,7 +9,7 @@ if ("${JSON_MAPPER_RAPIDJSON_INCLUDE_PATH}" STREQUAL "")
 endif()
 
 add_library(jsonmapper INTERFACE)
-target_include_directories(jsonmapper INTERFACE 
+target_include_directories(jsonmapper INTERFACE
     include
     ${JSON_MAPPER_RAPIDJSON_INCLUDE_PATH}
 )
@@ -24,3 +24,5 @@ if (JSONMAPPER_BUILD_EXAMPLE)
         target_link_libraries(${example} PRIVATE jsonmapper)
     endforeach()
 endif(JSONMAPPER_BUILD_EXAMPLE)
+
+set(_JSONMAPPER_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE PATH "JsonMapper's Root Path")
