@@ -7,9 +7,10 @@ namespace jsonmapper {
 
 template <class T>
 struct DeserializerImpl<std::list<T>> {
-    bool operator()(std::list<T>& list, const rapidjson::Value& value, const DeserializeContext& context)
+    bool operator()(std::list<T>& list, const rapidjson::Value& value, DeserializeContext& context)
     {
         if (!value.IsArray()) {
+            context.SetError(std::string("Not a value of list"));
             return false;
         }
 
@@ -18,6 +19,7 @@ struct DeserializerImpl<std::list<T>> {
         auto listIt = list.begin();
         for (auto it = value.Begin(), endIt = value.End(); it != endIt; ++it) {
             if (!DeserializeFromJson(*listIt++, *it, context)) {
+                context.SetError("Failed to deserialize element[" + std::to_string(index) + "]");
                 return false;
             }
         }

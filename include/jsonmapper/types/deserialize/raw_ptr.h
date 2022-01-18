@@ -6,7 +6,7 @@ namespace jsonmapper {
 
 template <class T>
 struct DeserializerImpl<T*> {
-    bool operator()(T* t, const rapidjson::Value& value, const DeserializeContext& context)
+    bool operator()(T* t, const rapidjson::Value& value, DeserializeContext& context)
     {
         // Do not use 'static_assert' directly, which will cause compile error on g++/clang even though
         // this specialization does not really happen

@@ -61,12 +61,13 @@ const std::string kJsonString =
 int main(int argc, char** argv)
 {
     Student stu;
-    bool succeed = jsonmapper::DeserializeFromJsonString(stu, kJsonString);
+    jsonmapper::DeserializeContext context {};
+    bool succeed = jsonmapper::DeserializeFromJsonString(stu, kJsonString, context);
     if (succeed) {
         // Here, the struct `stu` is filled
         std::cout << "Succeed" << std::endl;
     } else {
-        std::cout << "Failed" << std::endl;
+        std::cout << "Failed: " << context.GetErrorString() << std::endl;
     }
 
     return 0;

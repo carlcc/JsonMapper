@@ -138,7 +138,8 @@ int main(int argc, char** argv)
     }
 
     Student stuDeserialize;
-    jsonmapper::DeserializeFromJson(stuDeserialize, root, {});
+    jsonmapper::DeserializeContext context {};
+    jsonmapper::DeserializeFromJson(stuDeserialize, root, context);
 
     return 0;
 }

@@ -7,7 +7,7 @@ namespace jsonmapper {
 
 template <class T>
 struct DeserializerImpl<std::shared_ptr<T>> {
-    bool operator()(std::shared_ptr<T>& t, const rapidjson::Value& value, const DeserializeContext& context)
+    bool operator()(std::shared_ptr<T>& t, const rapidjson::Value& value, DeserializeContext& context)
     {
         if (value.IsNull()) {
             t = nullptr;
