@@ -127,7 +127,7 @@ inline bool DeserializeFromJsonString(T& t, StringView string, DeserializeContex
     root.Parse(string.data(), (rapidjson::SizeType)string.length());
     if (root.HasParseError()) {
         char buf[512];
-        sprintf(buf, "Failed to parse json: %s, around offset %u\n", rapidjson::GetParseError_En(root.GetParseError()), root.GetErrorOffset());
+        sprintf(buf, "Failed to parse json: %s, around offset %zu\n", rapidjson::GetParseError_En(root.GetParseError()), root.GetErrorOffset());
         context.SetError(buf);
         return false;
     }
