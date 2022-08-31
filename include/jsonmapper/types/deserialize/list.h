@@ -17,11 +17,13 @@ struct DeserializerImpl<std::list<T>> {
         list.resize((size_t)value.Size());
 
         auto listIt = list.begin();
+        size_t i = 0;
         for (auto it = value.Begin(), endIt = value.End(); it != endIt; ++it) {
             if (!DeserializeFromJson(*listIt++, *it, context)) {
-                context.SetError("Failed to deserialize element[" + std::to_string(index) + "]");
+                context.SetError("Failed to deserialize element[" + std::to_string(i) + "]");
                 return false;
             }
+            ++i;
         }
         return true;
     }
