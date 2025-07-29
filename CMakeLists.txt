@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.18)
 
 project(jsonmapper)
 
@@ -17,11 +17,17 @@ target_include_directories(jsonmapper INTERFACE
 # example
 if (JSONMAPPER_BUILD_EXAMPLE)
     file(GLOB_RECURSE JSON_MAPPER_FILES include/*)
-    set(EXAMPLES example1 example2 example3)
+    set(EXAMPLES example1 example2 example3 example4)
 
     foreach(example ${EXAMPLES})
         add_executable(${example} example/${example}.cpp ${JSON_MAPPER_FILES})
         target_link_libraries(${example} PRIVATE jsonmapper)
+
+        set_target_properties(${example}
+        PROPERTIES
+            CXX_STANDARD 20
+            CXX_STANDARD_REQUIRED ON
+        )
     endforeach()
 endif(JSONMAPPER_BUILD_EXAMPLE)
 

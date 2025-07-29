@@ -31,7 +31,7 @@ if has_config("jsonmapper-build-example") then
         local targetName = path.basename(filepath)
         target(targetName)
             set_kind("binary")
-            set_languages("cxx17")
+            set_languages("cxx20")
             add_files(filepath)
             add_deps("jsonmapper")
         target_end()
