@@ -78,10 +78,10 @@ public:
         return true;
     }
 
-    template <class ARG1, class... ARGS>
-    bool operator()(const ARG1& arg1, const ARGS&... args)
+    template <KeyValuePair... ARGS>
+    bool operator()(const ARGS&... args)
     {
-        return operator()(arg1) && operator()(args...);
+        return (operator()(args) && ...);
     }
 };
 
@@ -104,11 +104,19 @@ inline bool DeserializeFromJson(T& t, const rapidjson::Value& value, Deserialize
     return DeserializerImpl<T>()(t, value, context);
 }
 
+template <>
+inline bool DeserializeFromJson<rapidjson::Value>(rapidjson::Value& t, const rapidjson::Value& value, DeserializeContext& context)
+{
+    // TODO: copy?
+    t = const_cast<rapidjson::Value&>(value);
+    return true;
+}
+
 template <class T>
 inline bool DeserializeFromJsonString(T& t, StringView string)
 {
     rapidjson::Document root;
-    root.Parse(string.data(), (rapidjson::SizeType)string.length());
+    root.Parse<JM_RAPIDJSON_PARSE_FLAGS>(string.data(), (rapidjson::SizeType)string.length());
     if (root.HasParseError()) {
         return false;
     }
@@ -124,7 +132,7 @@ template <class T>
 inline bool DeserializeFromJsonString(T& t, StringView string, DeserializeContext& context)
 {
     rapidjson::Document root;
-    root.Parse(string.data(), (rapidjson::SizeType)string.length());
+    root.Parse<JM_RAPIDJSON_PARSE_FLAGS>(string.data(), (rapidjson::SizeType)string.length());
     if (root.HasParseError()) {
         char buf[512];
         snprintf(buf, sizeof(buf), "Failed to parse json: %s, around offset %zu\n", rapidjson::GetParseError_En(root.GetParseError()), root.GetErrorOffset());

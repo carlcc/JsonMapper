@@ -5,6 +5,12 @@
 
 namespace jsonmapper {
 
+#define JM_RAPIDJSON_PARSE_FLAGS (rapidjson::kParseFullPrecisionFlag \
+    | rapidjson::kParseCommentsFlag                                  \
+    | rapidjson::kParseTrailingCommasFlag                            \
+    | rapidjson::kParseNanAndInfFlag                                 \
+    | rapidjson::kParseEscapedApostropheFlag)
+
 template <class T>
 struct KVPair {
     const char* key;
@@ -68,6 +74,12 @@ const auto& getFromEnumMap(ARGS... args)
 #define JMOPTKVP2(field) ::jsonmapper::MakeOptKVPair(#field, t.field)
 
 #define JMEKVP(enum_) ::jsonmapper::MakeEKVPair(#enum_, enum_)
+
+template <typename T>
+concept KeyValuePair = requires(T& t) {
+    t.key;
+    t.value;
+} && std::is_reference_v<decltype(std::declval<T>().value)>;
 
 } // namespace jsonmapper
 

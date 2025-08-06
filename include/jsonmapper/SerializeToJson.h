@@ -54,10 +54,10 @@ public:
         return true;
     }
 
-    template <class ARG1, class... ARGS>
-    bool operator()(const ARG1& arg1, const ARGS&... args)
+    template <KeyValuePair... ARGS>
+    bool operator()(const ARGS&... args)
     {
-        return operator()(arg1) && operator()(args...);
+        return (operator()(args) && ...);
     }
 };
 
@@ -75,6 +75,14 @@ template <class T>
 inline bool SerializeToJson(const T& t, rapidjson::Value& value, const SerializeContext& context)
 {
     return SerializerImpl<T>()(t, value, context);
+}
+
+template <>
+inline bool SerializeToJson(const rapidjson::Value& t, rapidjson::Value& value, const SerializeContext& context)
+{
+    // TODO: copy?
+    value = const_cast<rapidjson::Value&>(t);
+    return true;
 }
 
 template <class T>
